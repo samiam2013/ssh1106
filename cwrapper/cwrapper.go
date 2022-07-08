@@ -58,3 +58,11 @@ func (l LCD) PrintAtRowCol(value rune, row, col int) error {
 	}
 	return nil
 }
+
+// Clear empties the screen with C.lcd_clear()
+func (l LCD) Clear() error {
+	if C.lcd_clear() != 0 {
+		return fmt.Errorf("call to C.lcd_clear returned non-zero code")
+	}
+	return nil
+}
