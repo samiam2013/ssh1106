@@ -12,17 +12,10 @@
 #include "font8x8/font8x8.h"
 
 static int file;
-const char init_[] = {0x0, 0xAE, 0x8D, 0x14, 0xAF};
-
-/*int lcd_init(char *filename);
-int lcd_close();
-int lcd_move(uint8_t x, uint8_t y);
-int lcd_clear();
-int lcd_printc(const char chr, const char cursor);
-int lcd_printmap(const char map[64][16]);*/
+const char init_[] = {0x0, 0xAE, 0x8D, 0x14, 0xAF}; // sequence to turn on the LCD ?
 
 int init_i2c(const char *filename) {
-    int addr = 0x3c;
+    int addr = 0x3c; // TODO this should probably be a parameter for the Go code
 
     if ((file = open(filename, O_RDWR)) < 0) {
         printf("Failed to open the bus.");
@@ -89,7 +82,6 @@ int lcd_printc(const char chr, const int cursor) {
             tmp[bt + 1] |= bit << b;
         }
     }
-    printf("finished writing character.\n");
     return I2C_Write(tmp, 9);
 }
 
@@ -113,13 +105,3 @@ int lcd_printmap(const char map[64][16]) {
     }
     return 0;
 }
-
-
-/*int main(int argc, int *argv[]){
-	lcd_init("/dev/i2c-1");
-	lcd_printc('A',0);
-	return 0;
-}*/
-
-
-
