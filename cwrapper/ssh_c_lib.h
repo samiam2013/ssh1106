@@ -1,6 +1,6 @@
 #ifndef _CINTERFACE_H
 #define _CINTERFACE_H
-int lcd_init(char *filename);
+int lcd_init(char *filename, int addr);
 int lcd_close();
 int lcd_move(int x, int y);
 int lcd_clear();

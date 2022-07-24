@@ -14,9 +14,7 @@
 static int file;
 const char init_[] = {0x0, 0xAE, 0x8D, 0x14, 0xAF}; // sequence to turn on the LCD ?
 
-int init_i2c(const char *filename) {
-    int addr = 0x3c; // TODO this should probably be a parameter for the Go code
-
+int init_i2c(const char *filename, int addr) {
     if ((file = open(filename, O_RDWR)) < 0) {
         printf("Failed to open the bus.");
         return -1;
@@ -37,8 +35,8 @@ int I2C_Write(const char *buf, size_t sz) {
     return 0;
 }
 
-int lcd_init(char *filename) {
-    if (init_i2c(filename)) {
+int lcd_init(char *filename, int addr) {
+    if (init_i2c(filename, addr)) {
         return -1;
     }
     return I2C_Write(init_, 5); // sizeof init_ / sizeof init_[0]
