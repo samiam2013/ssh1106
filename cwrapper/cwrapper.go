@@ -53,7 +53,7 @@ func (l LCD) PrintAtRowCol(value rune, row, col int) error {
 	}
 
 	if C.lcd_printc(C.char(value), C.int(position)) != 0 {
-		return fmt.Errorf("Error printing value %c at position %d", value, position)
+		return fmt.Errorf("error printing value %c at position %d", value, position)
 	}
 	return nil
 }
